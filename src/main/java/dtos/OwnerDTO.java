@@ -24,7 +24,6 @@ public class OwnerDTO {
         this.name = o.getName();
         this.address = o.getAddress();
         this.phone = o.getPhone();
-
     }
 
     public static List<OwnerDTO> getDtos(List<Owner> os){
