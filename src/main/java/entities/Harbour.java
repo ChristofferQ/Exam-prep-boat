@@ -6,33 +6,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Owner implements Serializable {
-
+public class Harbour implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private String name;
     private String address;
-    private int phone;
+    private int capacity;
 
-    public Owner() {
+    public Harbour() {
     }
 
-    public Owner(String name, String address, int phone) {
+    public Harbour(long id, String name, String address, int capacity) {
+        this.id = id;
         this.name = name;
         this.address = address;
-        this.phone = phone;
+        this.capacity = capacity;
     }
 
-    @OneToMany(mappedBy = "owner")
-    private List<Boat> boats = new ArrayList<>();
+@OneToMany(mappedBy = "harbour")
+private List<Boat> boats = new ArrayList<>();
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -52,12 +52,12 @@ public class Owner implements Serializable {
         this.address = address;
     }
 
-    public int getPhone() {
-        return phone;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public void setPhone(int phone) {
-        this.phone = phone;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public List<Boat> getBoats() {
@@ -70,18 +70,18 @@ public class Owner implements Serializable {
 
     public void addBoat(Boat boat){
         this.boats.add(boat);
-        if(boat.getOwner() != this){
-            boat.setOwner(this);
+        if (boat.getHarbour() != this){
+            boat.setHarbour(this);
         }
     }
 
     @Override
     public String toString() {
-        return "Owner{" +
+        return "Harbour{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", phone=" + phone +
+                ", capacity=" + capacity +
                 ", boats=" + boats +
                 '}';
     }

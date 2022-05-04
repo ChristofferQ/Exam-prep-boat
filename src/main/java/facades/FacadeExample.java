@@ -1,7 +1,10 @@
 package facades;
 
+import dtos.BoatDTO;
 import dtos.OwnerDTO;
 import dtos.RenameMeDTO;
+import entities.Boat;
+import entities.Harbour;
 import entities.Owner;
 import entities.RenameMe;
 
@@ -42,7 +45,9 @@ public class FacadeExample {
         return OwnerDTO.getDtos(os);
     }
 
-
+//    public List<BoatDTO> getBoatsByHarbour(Harbour id){
+//
+//    }
 
     
     public static void main(String[] args) {
