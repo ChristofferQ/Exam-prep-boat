@@ -20,3 +20,7 @@ POST http://localhost:8080/devops_starter_war_exploded/api/login
 ###
 GET http://localhost:8080/devops_starter_war_exploded/api/info/admin
 x-access-token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiYWRtaW4iLCJleHAiOjE2NTAzNjUzNzMsImlhdCI6MTY1MDM2MzU3MywiaXNzdWVyIjoic2VtZXN0ZXJzdGFydGNvZGUtZGF0MyIsInVzZXJuYW1lIjoiYWRtaW4ifQ.-gro4bZOxGAOOFgdGYzPMv5uJF2wLhCoJvBiRbmOEKo
+
+###
+GET http://localhost:8080/devops_starter_war_exploded/api/xxx/harbour/1
+

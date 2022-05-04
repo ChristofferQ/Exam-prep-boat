@@ -7,9 +7,7 @@ import facades.FacadeExample;
 
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -28,5 +26,13 @@ public class RenameMeResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAllOwners() {
         return Response.ok(GSON.toJson(FACADE.getAllOwners())).build();
+    }
+
+    @Path("harbour/{id}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response getBoatsByHarbour(@PathParam("id") long id) {
+        return Response.ok(GSON.toJson(FACADE.getBoatsByHarbour(id))).build();
     }
 }

@@ -18,7 +18,7 @@ public class Harbour implements Serializable {
     public Harbour() {
     }
 
-    public Harbour(long id, String name, String address, int capacity) {
+    public Harbour(String name, String address, int capacity) {
         this.id = id;
         this.name = name;
         this.address = address;

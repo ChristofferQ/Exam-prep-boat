@@ -1,9 +1,7 @@
 package utils;
 
 
-import entities.Owner;
-import entities.Role;
-import entities.User;
+import entities.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -28,6 +26,12 @@ public class SetupTestUsers {
     Owner owner1 = new Owner("name1", "address1", 1234);
     Owner owner2 = new Owner("name2", "address2", 5678);
 
+    Harbour harbour1 = new Harbour("name1", "address1",5550);
+    Harbour harbour2 = new Harbour("name2", "address2",105000);
+
+    Boat boat1 = new Boat("brand1", "make1", "name1", "image1",owner1,harbour1);
+    Boat boat2 = new Boat("brand2", "make2", "name2", "image2",owner2,harbour2);
+
     if(admin.getUserPass().equals("test")||user.getUserPass().equals("test")||both.getUserPass().equals("test"))
       throw new UnsupportedOperationException("You have not changed the passwords");
 
@@ -45,6 +49,10 @@ public class SetupTestUsers {
     em.persist(both);
     em.persist(owner1);
     em.persist(owner2);
+    em.persist(harbour1);
+    em.persist(harbour2);
+    em.persist(boat1);
+    em.persist(boat2);
     em.getTransaction().commit();
     System.out.println("PW: " + user.getUserPass());
     System.out.println("Testing user with OK password: " + user.verifyPassword("test"));

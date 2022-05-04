@@ -14,7 +14,7 @@ public class Boat implements Serializable {
     private String name;
     private String image;
 
-    public Boat(int id, String brand, String make, String name, String image, Owner owner, Harbour harbour) {
+    public Boat( String brand, String make, String name, String image, Owner owner, Harbour harbour) {
         this.id = id;
         this.brand = brand;
         this.make = make;
