@@ -24,3 +24,13 @@ x-access-token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiYWRtaW4iLCJ
 ###
 GET http://localhost:8080/devops_starter_war_exploded/api/xxx/harbour/1
 
+###
+POST http://localhost:8080/devops_starter_war_exploded/api/xxx/createboat
+
+{
+"brand":"brand4",
+"make":"make4",
+"name":"name4",
+"image":"image4"
+}
+

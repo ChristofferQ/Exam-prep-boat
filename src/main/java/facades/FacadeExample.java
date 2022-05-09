@@ -63,13 +63,25 @@ public class FacadeExample {
         return OwnerDTO.getDtos(os);
     }
 
+    public BoatDTO createBoat(BoatDTO b){
+        Boat be = new Boat(b.getBrand(), b.getMake(), b.getName(), b.getImage());
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(be);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new BoatDTO(be);
+    }
+
     
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
         FacadeExample fe = getFacadeExample(emf);
         fe.getBoatsByHarbour(2);
         fe.getOwnerByBoat(2);
-
 
     }
 }
