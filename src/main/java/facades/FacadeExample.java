@@ -76,6 +76,22 @@ public class FacadeExample {
         return new BoatDTO(be);
     }
 
+    public BoatDTO connectBoatWithHarbour(BoatDTO boatDTO) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Boat b = em.find(Boat.class, boatDTO.getId());
+
+            b.setHarbour(b.getHarbour());
+
+            em.getTransaction().begin();
+            em.merge(b);
+            em.getTransaction().commit();
+            return new BoatDTO(b);
+        } finally {
+            em.close();
+        }
+    }
+
     
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();

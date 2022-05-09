@@ -34,3 +34,10 @@ POST http://localhost:8080/devops_starter_war_exploded/api/xxx/createboat
 "image":"image4"
 }
 
+###
+PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/connectboat/4
+
+{
+"harbour_id":"2"
+}
+

@@ -58,4 +58,20 @@ public class RenameMeResource {
         BoatDTO bo = FACADE.createBoat(b);
         return Response.ok(bo).build();
     }
+
+    //RolesAllowed not added for easier testing
+    @Path("connectboat/{id}")
+    //@RolesAllowed("admin")
+    @PUT
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response connectBoatWithHarbour(@PathParam("id") long id, String boat){
+        BoatDTO b = GSON.fromJson(boat, BoatDTO.class);
+        b.setId(id);
+        BoatDTO bEdited = FACADE.connectBoatWithHarbour(b);
+        return Response.ok(GSON.toJson(bEdited)).build();
+    }
+
+    
+
 }
