@@ -50,9 +50,17 @@ public class FacadeExample {
         TypedQuery<Boat> query = em.createQuery("SELECT b FROM Boat b WHERE b.harbour.id =:id", Boat.class);
         query.setParameter("id", id);
         List<Boat> bs = query.getResultList();
-        System.out.println(bs);
+        System.out.println("Testing getBoatsByHarbour \n" + bs);
         return BoatDTO.getDtos(bs);
+    }
 
+    public List<OwnerDTO> getOwnerByBoat(long id){
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Owner> query = em.createQuery("SELECT b.owner FROM Boat b WHERE b.id =:id", Owner.class);
+        query.setParameter("id",id);
+        List<Owner> os = query.getResultList();
+        System.out.println("Testing getOwnerByBoat \n" + os);
+        return OwnerDTO.getDtos(os);
     }
 
     
@@ -60,6 +68,7 @@ public class FacadeExample {
         emf = EMF_Creator.createEntityManagerFactory();
         FacadeExample fe = getFacadeExample(emf);
         fe.getBoatsByHarbour(2);
+        fe.getOwnerByBoat(2);
 
 
     }

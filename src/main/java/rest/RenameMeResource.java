@@ -34,4 +34,11 @@ public class RenameMeResource {
     public Response getBoatsByHarbour(@PathParam("id") long id) {
         return Response.ok(GSON.toJson(FACADE.getBoatsByHarbour(id))).build();
     }
+
+    @Path("boatowner/{id}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getOwnerByBoat(@PathParam("id") long id) {
+        return Response.ok(GSON.toJson(FACADE.getOwnerByBoat(id))).build();
+    }
 }
