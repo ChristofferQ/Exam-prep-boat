@@ -10,10 +10,8 @@ import entities.RenameMe;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
+import javax.ws.rs.core.Response;
 
 //import errorhandling.RenameMeNotFoundException;
 import utils.EMF_Creator;
@@ -76,6 +74,7 @@ public class FacadeExample {
         return new BoatDTO(be);
     }
 
+    /*
     public BoatDTO connectBoatWithHarbour(BoatDTO boatDTO) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -91,6 +90,7 @@ public class FacadeExample {
             em.close();
         }
     }
+    */
 
     public BoatDTO editBoat(BoatDTO boatDTO) {
         EntityManager em = emf.createEntityManager();
@@ -106,6 +106,19 @@ public class FacadeExample {
             em.merge(b);
             em.getTransaction().commit();
             return new BoatDTO(b);
+        } finally {
+            em.close();
+        }
+    }
+
+    public Response deleteBoat(long id){
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Query q = em.createQuery("DELETE FROM Boat b WHERE b.id =: id").setParameter("id",id);
+            int deleteBoat = q.executeUpdate(); //The hell is this? 
+            em.getTransaction().commit();
+            return Response.ok(deleteBoat).build();
         } finally {
             em.close();
         }

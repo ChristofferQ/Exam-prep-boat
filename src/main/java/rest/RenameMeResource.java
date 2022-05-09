@@ -59,6 +59,7 @@ public class RenameMeResource {
         return Response.ok(bo).build();
     }
 
+    /*
     //RolesAllowed not added for easier testing
     @Path("connectboat/{id}")
     //@RolesAllowed("admin")
@@ -70,7 +71,7 @@ public class RenameMeResource {
         b.setId(id);
         BoatDTO bEdited = FACADE.connectBoatWithHarbour(b);
         return Response.ok(GSON.toJson(bEdited)).build();
-    }
+    } */
 
     //RolesAllowed not added for easier testing
     @Path("boat/edit/{id}")
@@ -89,6 +90,11 @@ public class RenameMeResource {
     @Path("boat/delete/{id}")
     //@RolesAllowed("admin")
     @DELETE
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response deleteBoat(@PathParam("id") long id) {
+        return Response.ok(GSON.toJson(FACADE.deleteBoat(id))).build();
+    }
 
 
 }
