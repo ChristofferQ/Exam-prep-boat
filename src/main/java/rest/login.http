@@ -28,10 +28,10 @@ GET http://localhost:8080/devops_starter_war_exploded/api/xxx/harbour/1
 POST http://localhost:8080/devops_starter_war_exploded/api/xxx/createboat
 
 {
-"brand":"brand4",
-"make":"make4",
-"name":"name4",
-"image":"image4"
+"brand":"brand5",
+"make":"make5",
+"name":"name5",
+"image":"image5"
 }
 
 ###
@@ -39,5 +39,15 @@ PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/connectboat/4
 
 {
 "harbour_id":"2"
+}
+
+###
+PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/boat/edit/4
+
+{
+"brand":"BRAND5",
+"make":"MAKE5",
+"name":"NAME5",
+"image":"IMAGE5"
 }
 

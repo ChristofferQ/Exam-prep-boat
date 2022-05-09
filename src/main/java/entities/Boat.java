@@ -8,7 +8,7 @@ public class Boat implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String brand;
     private String make;
     private String name;
@@ -40,11 +40,11 @@ public class Boat implements Serializable {
     @ManyToOne
     private Harbour harbour;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

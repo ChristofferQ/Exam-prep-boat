@@ -81,7 +81,26 @@ public class FacadeExample {
         try {
             Boat b = em.find(Boat.class, boatDTO.getId());
 
-            b.setHarbour(b.getHarbour());
+            b.setHarbour(boatDTO.getHarbour());
+
+            em.getTransaction().begin();
+            em.merge(b);
+            em.getTransaction().commit();
+            return new BoatDTO(b);
+        } finally {
+            em.close();
+        }
+    }
+
+    public BoatDTO editBoat(BoatDTO boatDTO) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Boat b = em.find(Boat.class, boatDTO.getId());
+
+            b.setBrand(boatDTO.getBrand());
+            b.setMake(boatDTO.getMake());
+            b.setName(boatDTO.getName());
+            b.setImage(boatDTO.getImage());
 
             em.getTransaction().begin();
             em.merge(b);
