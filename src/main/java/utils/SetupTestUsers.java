@@ -31,6 +31,7 @@ public class SetupTestUsers {
 
     Boat boat1 = new Boat("brand1", "make1", "name1", "image1",owner1,harbour1);
     Boat boat2 = new Boat("brand2", "make2", "name2", "image2",owner2,harbour2);
+    Boat boat3 = new Boat("brand3","make3","name3","image3", owner1, harbour2);
 
     if(admin.getUserPass().equals("test")||user.getUserPass().equals("test")||both.getUserPass().equals("test"))
       throw new UnsupportedOperationException("You have not changed the passwords");
@@ -53,6 +54,7 @@ public class SetupTestUsers {
     em.persist(harbour2);
     em.persist(boat1);
     em.persist(boat2);
+    em.persist(boat3);
     em.getTransaction().commit();
     System.out.println("PW: " + user.getUserPass());
     System.out.println("Testing user with OK password: " + user.verifyPassword("test"));

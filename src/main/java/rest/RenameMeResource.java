@@ -31,7 +31,6 @@ public class RenameMeResource {
     @Path("harbour/{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
     public Response getBoatsByHarbour(@PathParam("id") long id) {
         return Response.ok(GSON.toJson(FACADE.getBoatsByHarbour(id))).build();
     }

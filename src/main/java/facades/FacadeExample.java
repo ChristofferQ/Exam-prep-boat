@@ -22,7 +22,7 @@ public class FacadeExample {
 
     private static FacadeExample instance;
     private static EntityManagerFactory emf;
-    
+
     //Private Constructor to ensure Singleton
     private FacadeExample() {}
 
@@ -47,8 +47,10 @@ public class FacadeExample {
 
     public List<BoatDTO> getBoatsByHarbour(long id){
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Boat> query = em.createQuery("SELECT b FROM Boat b WHERE b.harbour =:id", Boat.class);
+        TypedQuery<Boat> query = em.createQuery("SELECT b FROM Boat b WHERE b.harbour.id =:id", Boat.class);
+        query.setParameter("id", id);
         List<Boat> bs = query.getResultList();
+        System.out.println(bs);
         return BoatDTO.getDtos(bs);
 
     }
@@ -57,5 +59,8 @@ public class FacadeExample {
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
         FacadeExample fe = getFacadeExample(emf);
+        fe.getBoatsByHarbour(2);
+
+
     }
 }
