@@ -52,5 +52,5 @@ PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/boat/edit/4
 }
 
 ###
-DELETE http://localhost:8080/devops_starter_war_exploded/api/xxx/boat/delete/5
+DELETE http://localhost:8080/devops_starter_war_exploded/api/xxx/boat/delete/1
 

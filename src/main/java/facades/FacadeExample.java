@@ -115,8 +115,10 @@ public class FacadeExample {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            Query q = em.createQuery("DELETE FROM Boat b WHERE b.id =: id").setParameter("id",id);
-            int deleteBoat = q.executeUpdate(); //The hell is this? 
+         //   Query q = em.createQuery("DELETE FROM Boat b WHERE b.id = :id").setParameter("id",id);
+        Query q = em.createQuery("DELETE FROM Boat b WHERE b.id = :id").setParameter("id",id);
+            int deleteBoat = q.executeUpdate(); //The hell is this?
+
             em.getTransaction().commit();
             return Response.ok(deleteBoat).build();
         } finally {

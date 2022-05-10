@@ -86,12 +86,12 @@ public class RenameMeResource {
         return Response.ok(bEdited).build();
     }
 
+
     //RolesAllowed not added for easier testing
     @Path("boat/delete/{id}")
     //@RolesAllowed("admin")
     @DELETE
     @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
     public Response deleteBoat(@PathParam("id") long id) {
         return Response.ok(GSON.toJson(FACADE.deleteBoat(id))).build();
     }
