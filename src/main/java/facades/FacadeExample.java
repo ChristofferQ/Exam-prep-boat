@@ -74,13 +74,15 @@ public class FacadeExample {
         return new BoatDTO(be);
     }
 
-    /*
-    public BoatDTO connectBoatWithHarbour(BoatDTO boatDTO) {
+
+    public BoatDTO connectBoatWithHarbour(long boatId, long harbourId) {
         EntityManager em = emf.createEntityManager();
         try {
-            Boat b = em.find(Boat.class, boatDTO.getId());
+            Boat b = em.find(Boat.class, boatId);
+            Harbour harbour = em.find(Harbour.class, harbourId);
 
-            b.setHarbour(boatDTO.getHarbour());
+            b.setHarbour(harbour);
+            harbour.addBoat(b);
 
             em.getTransaction().begin();
             em.merge(b);
@@ -90,7 +92,7 @@ public class FacadeExample {
             em.close();
         }
     }
-    */
+
 
     public BoatDTO editBoat(BoatDTO boatDTO) {
         EntityManager em = emf.createEntityManager();
@@ -132,6 +134,7 @@ public class FacadeExample {
         FacadeExample fe = getFacadeExample(emf);
         fe.getBoatsByHarbour(2);
         fe.getOwnerByBoat(2);
+        fe.connectBoatWithHarbour(1,1);
 
     }
 }
