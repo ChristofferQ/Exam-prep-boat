@@ -42,7 +42,7 @@ PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/connectboat/4
 }
 
 ###
-PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/boat/edit/4
+PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/boat/edit?boatId=3&harbourId=1&ownerId=1
 
 {
 "brand":"BRAND5",
