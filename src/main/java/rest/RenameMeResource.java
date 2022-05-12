@@ -3,9 +3,6 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.BoatDTO;
-import dtos.HarbourDTO;
-import dtos.OwnerDTO;
-import entities.Harbour;
 import utils.EMF_Creator;
 import facades.FacadeExample;
 
@@ -20,8 +17,8 @@ import javax.ws.rs.core.Response;
 public class RenameMeResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
-
-    private static final FacadeExample FACADE = FacadeExample.getFacadeExample(EMF);
+       
+    private static final FacadeExample FACADE =  FacadeExample.getFacadeExample(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     @Path("owners")
@@ -56,40 +53,36 @@ public class RenameMeResource {
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response createBoat(String Boat) {
+    public Response createBoat(String Boat){
         BoatDTO b = GSON.fromJson(Boat, BoatDTO.class);
         BoatDTO bo = FACADE.createBoat(b);
         return Response.ok(bo).build();
     }
 
-
+    /*
     //RolesAllowed not added for easier testing
     @Path("connectboat/{id}")
     //@RolesAllowed("admin")
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response connectBoatWithHarbour(@PathParam("id") long id, long harbourId, String boat) {
+    public Response connectBoatWithHarbour(@PathParam("id") long id, String boat){
         BoatDTO b = GSON.fromJson(boat, BoatDTO.class);
         b.setId(id);
-        BoatDTO bEdited = FACADE.connectBoatWithHarbour(id, harbourId);
+        BoatDTO bEdited = FACADE.connectBoatWithHarbour(b);
         return Response.ok(GSON.toJson(bEdited)).build();
-    }
+    } */
 
     //RolesAllowed not added for easier testing
-    @Path("boat/edit")
+    @Path("boat/edit/{id}")
     //@RolesAllowed("admin")
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response editBoat(
-            @QueryParam("boatid") long boatId,
-            @QueryParam("harbourid") long harbourId,
-            @QueryParam("ownerid") long ownerId,
-            String boat) {
+    public Response editBoat(@PathParam("id") long id, String boat) {
         BoatDTO b = GSON.fromJson(boat, BoatDTO.class);
-        b.setId(boatId);
-        BoatDTO bEdited = FACADE.editBoat(b, harbourId, ownerId);
+        b.setId(id);
+        BoatDTO bEdited = FACADE.editBoat(b);
         return Response.ok(bEdited).build();
     }
 
