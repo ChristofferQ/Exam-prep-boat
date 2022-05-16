@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.BoatDTO;
+import dtos.HarbourDTO;
 import utils.EMF_Creator;
 import facades.FacadeExample;
 
@@ -59,24 +60,23 @@ public class RenameMeResource {
         return Response.ok(bo).build();
     }
 
-/*
+
     //RolesAllowed not added for easier testing
     @Path("connectboat/{id}")
     //@RolesAllowed("admin")
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response connectBoatWithHarbour(@PathParam("id") long id, long harbourId, String boat){
-        BoatDTO b = GSON.fromJson(boat, BoatDTO.class);
-        b.setId(id);
-        BoatDTO bEdited = FACADE.connectBoatWithHarbour(id, harbourId);
+    public Response connectBoatWithHarbour(@PathParam("id") long id, String harbour){
+        HarbourDTO h = GSON.fromJson(harbour, HarbourDTO.class);
+        BoatDTO bEdited = FACADE.connectBoatWithHarbour(id, h.getId());
         return Response.ok(GSON.toJson(bEdited)).build();
     }
 
- */
+
 
     //RolesAllowed not added for easier testing
-    @Path("boat/edit/{id}")
+    @Path("boat/{id}")
     //@RolesAllowed("admin")
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
@@ -96,5 +96,4 @@ public class RenameMeResource {
     public Response deleteBoat(@PathParam("id") long id) {
         return Response.ok(GSON.toJson(FACADE.deleteBoat(id))).build();
     }
-
 }

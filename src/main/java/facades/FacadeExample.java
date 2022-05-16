@@ -36,6 +36,12 @@ public class FacadeExample {
         return emf.createEntityManager();
     }
 
+    public BoatDTO getBoatById(long boatId){
+        EntityManager em = emf.createEntityManager();
+        Boat b = em.find(Boat.class, boatId);
+        return new BoatDTO(b);
+    }
+
     public List<OwnerDTO> getAllOwners(){
         EntityManager em = emf.createEntityManager();
         TypedQuery<Owner> query = em.createQuery("SELECT o FROM Owner o", Owner.class);
@@ -98,11 +104,15 @@ public class FacadeExample {
         EntityManager em = emf.createEntityManager();
         try {
             Boat b = em.find(Boat.class, boatDTO.getId());
+            Harbour h = em.find(Harbour.class, boatDTO.getHarbourId());
+            Owner o = em.find(Owner.class, boatDTO.getOwnerId());
 
             b.setBrand(boatDTO.getBrand());
             b.setMake(boatDTO.getMake());
             b.setName(boatDTO.getName());
             b.setImage(boatDTO.getImage());
+            b.setHarbour(h);
+            b.setOwner(o);
 
             em.getTransaction().begin();
             em.merge(b);
@@ -135,6 +145,12 @@ public class FacadeExample {
         fe.getBoatsByHarbour(2);
         fe.getOwnerByBoat(2);
         fe.connectBoatWithHarbour(4,2);
+        BoatDTO be = fe.getBoatById(1);
+        be.setOwnerId(2);
+        be.setHarbourId(2);
+        fe.editBoat(be);
+        System.out.println("Testing editBoat" + "\n" + be);
+
 
     }
 }

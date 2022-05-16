@@ -11,6 +11,8 @@ public class BoatDTO {
     private String make;
     private String name;
     private String image;
+    private long harbourId;
+    private long ownerId;
 
     public BoatDTO(long id, String brand, String make, String name, String image) {
         this.id = id;
@@ -27,7 +29,16 @@ public class BoatDTO {
         this.make = b.getMake();
         this.name = b.getName();
         this.image = b.getImage();
+        if(harbourId != 0l) {
+            this.harbourId = b.getHarbour().getId();
+        }
+        if (ownerId != 0l) {
+            this.ownerId = b.getOwner().getId();
+        }
+
     }
+
+
 
     public static List<BoatDTO> getDtos(List<Boat> bs){
         List<BoatDTO> bdtos = new ArrayList<>();
@@ -73,5 +84,34 @@ public class BoatDTO {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public long getHarbourId() {
+        return harbourId;
+    }
+
+    public void setHarbourId(long harbourId) {
+        this.harbourId = harbourId;
+    }
+
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    @Override
+    public String toString() {
+        return "BoatDTO{" +
+                "id=" + id +
+                ", brand='" + brand + '\'' +
+                ", make='" + make + '\'' +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", harbourId=" + harbourId +
+                ", ownerId=" + ownerId +
+                '}';
     }
 }
