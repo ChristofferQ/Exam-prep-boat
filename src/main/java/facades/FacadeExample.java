@@ -134,7 +134,7 @@ public class FacadeExample {
         FacadeExample fe = getFacadeExample(emf);
         fe.getBoatsByHarbour(2);
         fe.getOwnerByBoat(2);
-        fe.connectBoatWithHarbour(1,1);
+        fe.connectBoatWithHarbour(4,2);
 
     }
 }

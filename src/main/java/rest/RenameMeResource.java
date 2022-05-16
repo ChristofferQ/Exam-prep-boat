@@ -59,19 +59,21 @@ public class RenameMeResource {
         return Response.ok(bo).build();
     }
 
-    /*
+/*
     //RolesAllowed not added for easier testing
     @Path("connectboat/{id}")
     //@RolesAllowed("admin")
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response connectBoatWithHarbour(@PathParam("id") long id, String boat){
+    public Response connectBoatWithHarbour(@PathParam("id") long id, long harbourId, String boat){
         BoatDTO b = GSON.fromJson(boat, BoatDTO.class);
         b.setId(id);
-        BoatDTO bEdited = FACADE.connectBoatWithHarbour(b);
+        BoatDTO bEdited = FACADE.connectBoatWithHarbour(id, harbourId);
         return Response.ok(GSON.toJson(bEdited)).build();
-    } */
+    }
+
+ */
 
     //RolesAllowed not added for easier testing
     @Path("boat/edit/{id}")
@@ -86,7 +88,6 @@ public class RenameMeResource {
         return Response.ok(bEdited).build();
     }
 
-
     //RolesAllowed not added for easier testing
     @Path("boat/delete/{id}")
     //@RolesAllowed("admin")
@@ -95,6 +96,5 @@ public class RenameMeResource {
     public Response deleteBoat(@PathParam("id") long id) {
         return Response.ok(GSON.toJson(FACADE.deleteBoat(id))).build();
     }
-
 
 }
