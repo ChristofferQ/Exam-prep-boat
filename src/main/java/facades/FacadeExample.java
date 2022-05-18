@@ -58,6 +58,13 @@ public class FacadeExample {
         return HarbourDTO.getDtos(hs);
     }
 
+    public List<BoatDTO> getAllBoats() {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Boat> query = em.createQuery("SELECT b FROM Boat b", Boat.class);
+        List<Boat> bs = query.getResultList();
+        return BoatDTO.getDtos(bs);
+    }
+
     public List<BoatDTO> getBoatsByHarbour(long id) {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Boat> query = em.createQuery("SELECT b FROM Boat b WHERE b.harbour.id =:id", Boat.class);

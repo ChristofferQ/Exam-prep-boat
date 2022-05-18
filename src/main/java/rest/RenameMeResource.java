@@ -36,7 +36,14 @@ public class RenameMeResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAllHarbours() {
         return Response.ok(GSON.toJson(FACADE.getAllHarbours())).build();
+    }
 
+    @Path("boats")
+    //@RolesAllowed("user")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAllBoats() {
+        return Response.ok(GSON.toJson(FACADE.getAllBoats())).build();
     }
 
     //RolesAllowed not added for easier testing
