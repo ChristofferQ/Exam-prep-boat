@@ -25,6 +25,9 @@ x-access-token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiYWRtaW4iLCJ
 GET http://localhost:8080/devops_starter_war_exploded/api/xxx/harbour/1
 
 ###
+GET http://localhost:8080/devops_starter_war_exploded/api/xxx/harbours
+
+###
 POST http://localhost:8080/devops_starter_war_exploded/api/xxx/createboat
 
 {

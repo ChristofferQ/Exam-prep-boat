@@ -18,8 +18,8 @@ import javax.ws.rs.core.Response;
 public class RenameMeResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
-       
-    private static final FacadeExample FACADE =  FacadeExample.getFacadeExample(EMF);
+
+    private static final FacadeExample FACADE = FacadeExample.getFacadeExample(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     @Path("owners")
@@ -28,6 +28,15 @@ public class RenameMeResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAllOwners() {
         return Response.ok(GSON.toJson(FACADE.getAllOwners())).build();
+    }
+
+    @Path("harbours")
+    //@RolesAllowed("user")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAllHarbours() {
+        return Response.ok(GSON.toJson(FACADE.getAllHarbours())).build();
+
     }
 
     //RolesAllowed not added for easier testing
@@ -54,7 +63,7 @@ public class RenameMeResource {
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response createBoat(String Boat){
+    public Response createBoat(String Boat) {
         BoatDTO b = GSON.fromJson(Boat, BoatDTO.class);
         BoatDTO bo = FACADE.createBoat(b);
         return Response.ok(bo).build();
@@ -67,12 +76,11 @@ public class RenameMeResource {
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response connectBoatWithHarbour(@PathParam("id") long id, String harbour){
+    public Response connectBoatWithHarbour(@PathParam("id") long id, String harbour) {
         HarbourDTO h = GSON.fromJson(harbour, HarbourDTO.class);
         BoatDTO bEdited = FACADE.connectBoatWithHarbour(id, h.getId());
         return Response.ok(GSON.toJson(bEdited)).build();
     }
-
 
 
     //RolesAllowed not added for easier testing

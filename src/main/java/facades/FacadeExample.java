@@ -1,6 +1,7 @@
 package facades;
 
 import dtos.BoatDTO;
+import dtos.HarbourDTO;
 import dtos.OwnerDTO;
 import dtos.RenameMeDTO;
 import entities.Boat;
@@ -22,7 +23,8 @@ public class FacadeExample {
     private static EntityManagerFactory emf;
 
     //Private Constructor to ensure Singleton
-    private FacadeExample() {}
+    private FacadeExample() {
+    }
 
     public static FacadeExample getFacadeExample(EntityManagerFactory _emf) {
         if (instance == null) {
@@ -36,20 +38,27 @@ public class FacadeExample {
         return emf.createEntityManager();
     }
 
-    public BoatDTO getBoatById(long boatId){
+    public BoatDTO getBoatById(long boatId) {
         EntityManager em = emf.createEntityManager();
         Boat b = em.find(Boat.class, boatId);
         return new BoatDTO(b);
     }
 
-    public List<OwnerDTO> getAllOwners(){
+    public List<OwnerDTO> getAllOwners() {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Owner> query = em.createQuery("SELECT o FROM Owner o", Owner.class);
         List<Owner> os = query.getResultList();
         return OwnerDTO.getDtos(os);
     }
 
-    public List<BoatDTO> getBoatsByHarbour(long id){
+    public List<HarbourDTO> getAllHarbours() {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Harbour> query = em.createQuery("SELECT h FROM Harbour h", Harbour.class);
+        List<Harbour> hs = query.getResultList();
+        return HarbourDTO.getDtos(hs);
+    }
+
+    public List<BoatDTO> getBoatsByHarbour(long id) {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Boat> query = em.createQuery("SELECT b FROM Boat b WHERE b.harbour.id =:id", Boat.class);
         query.setParameter("id", id);
@@ -58,16 +67,16 @@ public class FacadeExample {
         return BoatDTO.getDtos(bs);
     }
 
-    public List<OwnerDTO> getOwnerByBoat(long id){
+    public List<OwnerDTO> getOwnerByBoat(long id) {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Owner> query = em.createQuery("SELECT b.owner FROM Boat b WHERE b.id =:id", Owner.class);
-        query.setParameter("id",id);
+        query.setParameter("id", id);
         List<Owner> os = query.getResultList();
         System.out.println("Testing getOwnerByBoat \n" + os);
         return OwnerDTO.getDtos(os);
     }
 
-    public BoatDTO createBoat(BoatDTO b){
+    public BoatDTO createBoat(BoatDTO b) {
         Boat be = new Boat(b.getBrand(), b.getMake(), b.getName(), b.getImage());
         EntityManager em = getEntityManager();
         try {
@@ -123,12 +132,12 @@ public class FacadeExample {
         }
     }
 
-    public Response deleteBoat(long id){
+    public Response deleteBoat(long id) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-         //   Query q = em.createQuery("DELETE FROM Boat b WHERE b.id = :id").setParameter("id",id);
-        Query q = em.createQuery("DELETE FROM Boat b WHERE b.id = :id").setParameter("id",id);
+            //   Query q = em.createQuery("DELETE FROM Boat b WHERE b.id = :id").setParameter("id",id);
+            Query q = em.createQuery("DELETE FROM Boat b WHERE b.id = :id").setParameter("id", id);
             int deleteBoat = q.executeUpdate(); //The hell is this?
 
             em.getTransaction().commit();
@@ -138,13 +147,13 @@ public class FacadeExample {
         }
     }
 
-    
+
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
         FacadeExample fe = getFacadeExample(emf);
         fe.getBoatsByHarbour(2);
         fe.getOwnerByBoat(2);
-        fe.connectBoatWithHarbour(4,2);
+        fe.connectBoatWithHarbour(4, 2);
         BoatDTO be = fe.getBoatById(1);
         be.setOwnerId(2);
         be.setHarbourId(2);
